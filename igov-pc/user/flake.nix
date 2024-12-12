@@ -34,7 +34,8 @@
 				modules = [ 
 					({ ... }: { nixpkgs.overlays = [ overlay-packages ]; }) ] ++ 
 					(importModules /etc/aether/src/user/modules) ++ 
-					(importModules ~/.config/aether/modules) ++ [
+					(importModules ~/.config/aether/modules) ++ 
+					(importModules ~/.config/aether/secrets) ++ [
 					~/.config/aether/config.nix
 				];
 			};

@@ -11,5 +11,7 @@
   home.packages = with pkgs.software-development; [
     dotnetCorePackages.sdk_8_0
     vscode-fhs
+    git-crypt
+    age
   ];
 }
