@@ -1,0 +1,25 @@
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p git git-crypt age
+set -e
+mkdir -p $HOME/repositories/tsIgov
+cd $HOME/repositories/tsIgov
+
+if [[ ! -e "$HOME/repositories/tsIgov/aether" ]]; then
+	git clone https://github.com/tsIgov/aether.git
+fi
+
+if [ ! -e "$HOME/repositories/tsIgov/aether-config" ]; then
+	git clone https://github.com/tsIgov/aether-config.git
+fi
+
+while ! age -d -o ~/key ~/repositories/tsIgov/aether-config/key.age
+do
+  echo "Try again"
+done
+
+cd $HOME/repositories/tsIgov/aether-config
+git-crypt unlock $HOME/key
+rm $HOME/key
+
+cd ~/repositories/tsIgov/aether
+bash ./install
