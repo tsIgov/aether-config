@@ -12,6 +12,12 @@ if [ ! -e "$HOME/repositories/tsIgov/aether-config" ]; then
 	git clone https://github.com/tsIgov/aether-config.git
 fi
 
+sudo mkdir -p /etc/aether
+sudo ln -s $HOME/repositories/tsIgov/aether-config/$hostname/system /etc/aether/config
+
+mkdir -p $HOME/.config
+ln -s $HOME/repositories/tsIgov/aether-config/$hostname/user $HOME/.config/aether
+
 while ! age -d -o ~/key ~/repositories/tsIgov/aether-config/key.age
 do
   echo "Try again"
@@ -23,3 +29,4 @@ rm $HOME/key
 
 cd ~/repositories/tsIgov/aether
 bash ./install
+rm $0
