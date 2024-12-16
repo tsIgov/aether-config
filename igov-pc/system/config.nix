@@ -1,7 +1,9 @@
 { ... }:
 {
-	config = { 
-		hardware.graphics.nvidia = true;
+	config.aether.system = { 
+		graphics = {
+			nvidia = true;
+		};
 
 		garbage-collection = {
 			automatic = true;
@@ -9,6 +11,8 @@
 			days-old = 30;
 		};
 		
-		networking.hostName = "igov-pc";
+		networking = {
+			hostname = "igov-pc";
+		};
 	};
 }
