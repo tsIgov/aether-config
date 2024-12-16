@@ -19,16 +19,6 @@
 
 		digital-brain-pkgs = lib.importNixpkgs digital-brain;
 		software-development-pkgs = lib.importNixpkgs software-development;
-		# custom-pkgs = import /etc/aether/src/custom-packages/default.nix { inherit pkgs; };
-
-
-		# overlay-packages = final: prev: {
-		# 	custom = import /etc/aether/src/custom-packages/default.nix { inherit pkgs; };
-		# 	digital-brain = importPackages inputs.digital-brain;
-		# 	software-development = importPackages inputs.software-development;
-		# };
-
-
 	in {
 		nixosConfigurations = {
 			"igov-pc" = nixpkgs.lib.nixosSystem {
@@ -36,7 +26,7 @@
 				specialArgs = { };
 				modules = 
 					[ aether.nixosModules.system ] ++
-					(lib.getModulesRecursively ./system); 
+					(lib.getNixFilesRecursively ./system); 
 			};
 		};
 
@@ -49,7 +39,7 @@
 				modules = 
 					# [ ({ ... }: { nixpkgs.overlays = [ overlay-packages ]; }) ] ++ 
 					[ aether.nixosModules.user ] ++
-					(lib.getModulesRecursively ./user);
+					(lib.getNixFilesRecursively ./user);
 			};
 		};
 
