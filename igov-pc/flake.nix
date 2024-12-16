@@ -13,12 +13,13 @@
 		software-development.url = "github:nixos/nixpkgs/nixos-unstable";
 	};
 
-	outputs = { self, nixpkgs, aether, digital-brain, software-development, home-manager, ... } @inputs:
+	outputs = { self, nixpkgs, aether, home-manager, ... } @inputs:
 	let
 		lib = aether.lib;
+		pkgs = lib.importNixpkgs nixpkgs;
 
-		digital-brain-pkgs = lib.importNixpkgs digital-brain;
-		software-development-pkgs = lib.importNixpkgs software-development;
+		digital-brain-pkgs = lib.importNixpkgs inputs.digital-brain;
+		software-development-pkgs = lib.importNixpkgs inputs.software-development;
 	in {
 		nixosConfigurations = {
 			"igov-pc" = nixpkgs.lib.nixosSystem {
@@ -30,14 +31,11 @@
 			};
 		};
 
-
-
 		homeConfigurations = {
-			"igov-pc" = home-manager.lib.homeManagerConfiguration {
+			"igov" = home-manager.lib.homeManagerConfiguration {
 				pkgs = lib.importNixpkgs nixpkgs;
 				extraSpecialArgs = { inherit digital-brain-pkgs software-development-pkgs; };
 				modules = 
-					# [ ({ ... }: { nixpkgs.overlays = [ overlay-packages ]; }) ] ++ 
 					[ aether.nixosModules.user ] ++
 					(lib.getNixFilesRecursively ./user);
 			};

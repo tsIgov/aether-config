@@ -5,8 +5,8 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1734310875,
-        "narHash": "sha256-i4nWKa1ahvPxE1fHRFvE/TuSqt7F+ye/UWQqgaG8AvM=",
+        "lastModified": 1734313647,
+        "narHash": "sha256-O97O+kDmxP2uNDpWzEGuyShdF/Sp23BkZGez0+nJ9Ps=",
         "path": "/home/igov/repositories/tsIgov/aether-desktop-environment",
         "type": "path"
       },
