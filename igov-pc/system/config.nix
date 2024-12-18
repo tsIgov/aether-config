@@ -1,6 +1,16 @@
 { ... }:
 {
 	config.aether.system = { 
+
+		users = {
+			"igov" = {
+				description = "Tsvetan Igov";
+				isSystemUser = false;
+				sudoer = true;
+				initialPassword = "aether";
+			};
+		};
+
 		graphics = {
 			nvidia = true;
 		};
