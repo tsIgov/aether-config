@@ -11,10 +11,6 @@
 			};
 		};
 
-		graphics = {
-			nvidia = true;
-		};
-
 		garbage-collection = {
 			automatic = true;
 			schedule = "*-*-01 06:00";
