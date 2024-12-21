@@ -59,7 +59,7 @@ unlock_repo() {
 }
 
 install() {
-	sudo nixos-rebuild switch --impure --flake $(realpath /etc/aether/)
+	sudo nixos-rebuild switch --impure --flake $(realpath /etc/aether)#$host
 	home-manager switch --impure --flake $(realpath $HOME/.config/aether)
 }
 
