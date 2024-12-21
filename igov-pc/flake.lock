@@ -6,8 +6,8 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1734821225,
-        "narHash": "sha256-Ze4K87+0+iqcpaHwpiBDTTLd+9wNc5QJoED6Sc/4uhU=",
+        "lastModified": 1734824095,
+        "narHash": "sha256-wJuy7VvcbMffyjXUgE155dOGAGUUq2QojPsn03mAUpM=",
         "path": "/home/igov/repositories/tsIgov/aether-desktop-environment",
         "type": "path"
       },
@@ -39,11 +39,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1734808199,
-        "narHash": "sha256-MxlUcLjE8xLbrI1SJ2B2jftlg4wdutEILa3fgqwA98I=",
+        "lastModified": 1734821669,
+        "narHash": "sha256-F7Z2tIJsUEhErpK0sGMep4xG/eTVuK2eBpvgh3cS2H8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f342df3ad938f205a913973b832f52c12546aac6",
+        "rev": "51160a097a850839b7eae7ef08d0d3e7e353dfc3",
         "type": "github"
       },
       "original": {
