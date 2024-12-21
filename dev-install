@@ -39,10 +39,12 @@ pick_host() {
 }
 
 link_configs() {
+	sudo rm -f /etc/aether
 	sudo ln -s $REPO_LOCATION/aether-config/$host /etc/aether
 
 	mkdir -p $HOME/.config
-	sudo ln -s $HREPO_LOCATION/aether-config/$host $HOME/.config/aether
+	rm -f $HOME/.config/aether
+	ln -s $REPO_LOCATION/aether-config/$host $HOME/.config/aether
 }
 
 unlock_repo() {
@@ -57,8 +59,8 @@ unlock_repo() {
 }
 
 install() {
-	sudo nixos-rebuild switch --impure --flake $REPO_LOCATION/aether-config/$host
-	home-manager switch --impure --flake $REPO_LOCATION/aether-config/$host
+	sudo nixos-rebuild switch --impure --flake $(realpath /etc/aether/)
+	home-manager switch --impure --flake $(realpath $HOME/.config/aether)
 }
 
 set -e
