@@ -23,7 +23,7 @@
 	in {
 		nixosConfigurations = {
 			"igov-pc" = nixpkgs.lib.nixosSystem {
-				pkgs = lib.importNixpkgs nixpkgs;
+				inherit pkgs;
 				specialArgs = { };
 				modules = [ 
 					aether.nixosModules.system
@@ -34,7 +34,7 @@
 
 		homeConfigurations = {
 			"igov" = home-manager.lib.homeManagerConfiguration {
-				pkgs = lib.importNixpkgs nixpkgs;
+				inherit pkgs;
 				extraSpecialArgs = { inherit digital-brain-pkgs software-development-pkgs; };
 				modules = 
 					[ aether.nixosModules.user ] ++

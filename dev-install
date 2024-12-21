@@ -1,0 +1,74 @@
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p git git-crypt age
+
+clone_repos() {
+	mkdir -p $REPO_LOCATION
+	cd $REPO_LOCATION
+
+	if [[ ! -e "$REPO_LOCATION/aether-desktop-environment" ]]; then
+		git clone https://github.com/tsIgov/aether-desktop-environment.git
+	fi
+
+	if [ ! -e "$REPO_LOCATION/aether-config" ]; then
+		git clone https://github.com/tsIgov/aether-config.git
+	fi
+}
+
+pick_host() {
+
+	cd $REPO_LOCATION/aether-config
+
+	while true
+	do
+		echo
+		echo "Choose from the available hosts:"
+		for f in * ; do [ -d "$f" ] && echo -n "$f " ; done
+		echo
+		echo
+
+		read host
+		for f in *; do
+			if [[ $host == $f ]]; then
+				return
+			fi
+		done
+
+		echo "Invalid host."
+
+	done
+}
+
+link_configs() {
+	sudo ln -s $REPO_LOCATION/aether-config/$host /etc/aether
+
+	mkdir -p $HOME/.config
+	sudo ln -s $HREPO_LOCATION/aether-config/$host $HOME/.config/aether
+}
+
+unlock_repo() {
+	while ! age -d -o $HOME/key $REPO_LOCATION/aether-config/key.age
+	do
+		echo "Try again"
+	done
+
+	cd $REPO_LOCATION/aether-config
+	git-crypt unlock $HOME/key
+	rm $HOME/key
+}
+
+install() {
+	sudo nixos-rebuild switch --impure --flake $REPO_LOCATION/aether-config/$host
+	home-manager switch --impure --flake $REPO_LOCATION/aether-config/$host
+}
+
+set -e
+
+REPO_LOCATION=$HOME/repositories/tsIgov
+
+clone_repos
+pick_host
+link_configs
+unlock_repo
+install
+
+rm $0
