@@ -25,9 +25,10 @@
 			"igov-pc" = nixpkgs.lib.nixosSystem {
 				pkgs = lib.importNixpkgs nixpkgs;
 				specialArgs = { };
-				modules = 
-					[ aether.nixosModules.system ] ++
-					(lib.getNixFilesRecursively ./system); 
+				modules = [ 
+					aether.nixosModules.system
+					/etc/nixos/hardware-configuration.nix 
+				] ++ (lib.getNixFilesRecursively ./system); 
 			};
 		};
 
