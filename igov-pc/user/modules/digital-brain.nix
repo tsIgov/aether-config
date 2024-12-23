@@ -16,8 +16,8 @@ in
 		services.syncthing = {
 			enable = true;
 			package = digital-brain-pkgs.syncthing;
-			cert = "../secrets/syncthing-certs/cert.pem";
-			key = "../secrets/syncthing-certs/key.pem";
+			cert = "~/.config/aether/user/secrets/syncthing-certs/cert.pem";
+			key = "~/.config/aether/user/secrets/syncthing-certs/key.pem";
 			guiAddress = "127.0.0.1:8384";
 			overrideDevices = true;
 			overrideFolders = true;

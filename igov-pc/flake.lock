@@ -6,8 +6,8 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1734824095,
-        "narHash": "sha256-wJuy7VvcbMffyjXUgE155dOGAGUUq2QojPsn03mAUpM=",
+        "lastModified": 1734918161,
+        "narHash": "sha256-bLwo/KVWek05A40g+fcCKVsc++Vxl6eWkEJgBAybPD8=",
         "path": "/home/igov/repositories/tsIgov/aether-desktop-environment",
         "type": "path"
       },
@@ -100,12 +100,29 @@
         "type": "github"
       }
     },
+    "photography": {
+      "locked": {
+        "lastModified": 1734649271,
+        "narHash": "sha256-4EVBRhOjMDuGtMaofAIqzJbg4Ql7Ai0PSeuVZTHjyKQ=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d70bd19e0a38ad4790d3913bf08fcbfc9eeca507",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "aether": "aether",
         "digital-brain": "digital-brain",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
+        "photography": "photography",
         "software-development": "software-development"
       }
     },

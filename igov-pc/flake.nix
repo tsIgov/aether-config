@@ -11,6 +11,7 @@
 
 		digital-brain.url = "github:nixos/nixpkgs/nixos-unstable";
 		software-development.url = "github:nixos/nixpkgs/nixos-unstable";
+		photography.url = "github:nixos/nixpkgs/nixos-unstable";
 	};
 
 	outputs = { self, nixpkgs, aether, home-manager, ... } @inputs:
@@ -20,6 +21,7 @@
 
 		digital-brain-pkgs = lib.importNixpkgs inputs.digital-brain;
 		software-development-pkgs = lib.importNixpkgs inputs.software-development;
+		photography-pkgs = lib.importNixpkgs inputs.photography;
 	in {
 		nixosConfigurations = {
 			"igov-pc" = nixpkgs.lib.nixosSystem {
@@ -27,6 +29,7 @@
 				specialArgs = { };
 				modules = [ 
 					aether.nixosModules.system
+					aether.nixosModules.scripts
 					/etc/nixos/hardware-configuration.nix 
 				] ++ (lib.getNixFilesRecursively ./system); 
 			};
@@ -35,7 +38,7 @@
 		homeConfigurations = {
 			"igov" = home-manager.lib.homeManagerConfiguration {
 				inherit pkgs;
-				extraSpecialArgs = { inherit digital-brain-pkgs software-development-pkgs; };
+				extraSpecialArgs = { inherit digital-brain-pkgs software-development-pkgs photography-pkgs; };
 				modules = 
 					[ aether.nixosModules.user ] ++
 					(lib.getNixFilesRecursively ./user);
