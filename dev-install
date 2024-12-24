@@ -14,6 +14,17 @@ clone_repos() {
 	fi
 }
 
+unlock_repo() {
+	while ! age -d -o $HOME/key $REPO_LOCATION/aether-config/key.age
+	do
+		echo "Try again"
+	done
+
+	cd $REPO_LOCATION/aether-config
+	git-crypt unlock $HOME/key
+	rm $HOME/key
+}
+
 pick_host() {
 
 	cd $REPO_LOCATION/aether-config
@@ -39,23 +50,12 @@ pick_host() {
 }
 
 link_configs() {
-	sudo rm -f /etc/aether
-	sudo ln -s $REPO_LOCATION/aether-config/$host /etc/aether
-
 	mkdir -p $HOME/.config
 	rm -f $HOME/.config/aether
 	ln -s $REPO_LOCATION/aether-config/$host $HOME/.config/aether
-}
 
-unlock_repo() {
-	while ! age -d -o $HOME/key $REPO_LOCATION/aether-config/key.age
-	do
-		echo "Try again"
-	done
-
-	cd $REPO_LOCATION/aether-config
-	git-crypt unlock $HOME/key
-	rm $HOME/key
+	sudo rm -f /etc/aether
+	sudo ln -s $REPO_LOCATION/aether-config/$host /etc/aether
 }
 
 install() {
@@ -68,9 +68,9 @@ set -e
 REPO_LOCATION=$HOME/repositories/tsIgov
 
 clone_repos
+unlock_repo
 pick_host
 link_configs
-unlock_repo
 install
 
 rm $0
