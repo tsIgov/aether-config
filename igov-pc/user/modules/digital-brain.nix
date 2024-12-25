@@ -10,7 +10,7 @@ in
 
 	config = {
 		home.packages = with digital-brain-pkgs; [
-			obsidian
+			(obsidian.override { commandLineArgs = "--disable-gpu"; })
 		];
 
 		services.syncthing = {

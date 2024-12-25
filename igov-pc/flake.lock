@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "aether": {
+      "inputs": {
+        "hyprland": "hyprland",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1735086527,
+        "narHash": "sha256-II2iwuEi5p/YddlwpwORB/ER+G+VQJvNTQWFk7P+hrA=",
+        "path": "/home/igov/repositories/tsIgov/aether-desktop-environment",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/igov/repositories/tsIgov/aether-desktop-environment",
+        "type": "path"
+      }
+    },
     "digital-brain": {
       "locked": {
         "lastModified": 1734649271,
@@ -102,6 +118,7 @@
     },
     "root": {
       "inputs": {
+        "aether": "aether",
         "digital-brain": "digital-brain",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
