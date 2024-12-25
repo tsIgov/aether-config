@@ -6,14 +6,17 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1735086527,
-        "narHash": "sha256-II2iwuEi5p/YddlwpwORB/ER+G+VQJvNTQWFk7P+hrA=",
-        "path": "/home/igov/repositories/tsIgov/aether-desktop-environment",
-        "type": "path"
+        "lastModified": 1735090072,
+        "narHash": "sha256-Ua5IqGj8U+yijEptze7chI+8uyoAs3txY0+tXSxge9c=",
+        "owner": "tsIgov",
+        "repo": "aether-desktop-environment",
+        "rev": "9e48e7953b2d556b449112031d3f212fe5e69f9c",
+        "type": "github"
       },
       "original": {
-        "path": "/home/igov/repositories/tsIgov/aether-desktop-environment",
-        "type": "path"
+        "owner": "tsIgov",
+        "repo": "aether-desktop-environment",
+        "type": "github"
       }
     },
     "digital-brain": {

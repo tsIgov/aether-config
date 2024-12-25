@@ -3,7 +3,8 @@
 
 	inputs = {
 		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-		aether.url = "path:/home/igov/repositories/tsIgov/aether-desktop-environment";
+		#aether.url = "path:/home/igov/repositories/tsIgov/aether-desktop-environment";
+		aether.url = "github:tsIgov/aether-desktop-environment";
 		home-manager = {
 			url = "github:nix-community/home-manager";
 			inputs.nixpkgs.follows = "nixpkgs";
