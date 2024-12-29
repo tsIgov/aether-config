@@ -1,12 +1,16 @@
 {
-	description = "Aether desktop environment";
+	description = "Igov's personal computer";
 
 	inputs = {
 		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-		#aether.url = "path:/home/igov/repositories/tsIgov/aether-desktop-environment";
-		aether.url = "github:tsIgov/aether-desktop-environment";
 		home-manager = {
 			url = "github:nix-community/home-manager";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+		
+		aether = {
+			url = "path:/home/igov/repositories/tsIgov/aether-desktop-environment";
+			#url = "github:tsIgov/aether-desktop-environment";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
@@ -15,36 +19,37 @@
 		photography.url = "github:nixos/nixpkgs/nixos-unstable";
 	};
 
-	outputs = { self, nixpkgs, aether, home-manager, ... } @inputs:
+	outputs = { nixpkgs, aether, home-manager, ... } @inputs:
 	let
 		lib = aether.lib;
-		pkgs = lib.importNixpkgs nixpkgs;
-
-		digital-brain-pkgs = lib.importNixpkgs inputs.digital-brain;
-		software-development-pkgs = lib.importNixpkgs inputs.software-development;
-		photography-pkgs = lib.importNixpkgs inputs.photography;
+		packages = {
+			pkgs = lib.importNixpkgs nixpkgs;
+			digital-brain-pkgs = lib.importNixpkgs inputs.digital-brain;
+			software-development-pkgs = lib.importNixpkgs inputs.software-development;
+			photography-pkgs = lib.importNixpkgs inputs.photography;
+		};
 	in {
 		nixosConfigurations = {
 			"igov-pc" = nixpkgs.lib.nixosSystem {
-				inherit pkgs;
-				specialArgs = { };
+				pkgs = packages.pkgs;
 				modules = [ 
-					aether.nixosModules.system
+					aether.nixosModules.aether
 					aether.nixosModules.scripts
 					/etc/nixos/hardware-configuration.nix 
-				] ++ (lib.getNixFilesRecursively ./system); 
+					(lib.createRecursiveModuleWithExtraArgs ./system packages)
+					home-manager.nixosModules.home-manager
+					{
+						home-manager = {
+							useGlobalPkgs = true;
+            				useUserPackages = true;
+							sharedModules = [ aether.homeManagerModules.aether ];
+							users = {
+								"igov" = lib.createRecursiveModuleWithExtraArgs ./igov packages;
+							};
+						};
+					}
+				]; 
 			};
 		};
-
-		homeConfigurations = {
-			"igov" = home-manager.lib.homeManagerConfiguration {
-				inherit pkgs;
-				extraSpecialArgs = { inherit digital-brain-pkgs software-development-pkgs photography-pkgs; };
-				modules = 
-					[ aether.nixosModules.user ] ++
-					(lib.getNixFilesRecursively ./user);
-			};
-		};
-
 	};
 }
