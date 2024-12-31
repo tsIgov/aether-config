@@ -19,37 +19,20 @@
 		photography.url = "github:nixos/nixpkgs/nixos-unstable";
 	};
 
-	outputs = { nixpkgs, aether, home-manager, ... } @inputs:
+	outputs = inputs:
 	let
-		lib = aether.lib;
-		packages = {
-			pkgs = lib.importNixpkgs nixpkgs;
-			digital-brain-pkgs = lib.importNixpkgs inputs.digital-brain;
-			software-development-pkgs = lib.importNixpkgs inputs.software-development;
-			photography-pkgs = lib.importNixpkgs inputs.photography;
+		hostname = "igov-pc";
+		system = "x86_64-linux";
+		importArguments = { inherit system; config.allowUnfree = true; };
+
+		pkgs = import inputs.nixpkgs importArguments;
+		specialArgs = {
+			inherit inputs;
+			digital-brain-pkgs = import inputs.digital-brain importArguments;
+			software-development-pkgs = import inputs.software-development importArguments;
+			photography-pkgs = import inputs.photography importArguments;
 		};
 	in {
-		nixosConfigurations = {
-			"igov-pc" = nixpkgs.lib.nixosSystem {
-				pkgs = packages.pkgs;
-				modules = [ 
-					aether.nixosModules.aether
-					aether.nixosModules.scripts
-					/etc/nixos/hardware-configuration.nix 
-					(lib.createRecursiveModuleWithExtraArgs ./system packages)
-					home-manager.nixosModules.home-manager
-					{
-						home-manager = {
-							useGlobalPkgs = true;
-            				useUserPackages = true;
-							sharedModules = [ aether.homeManagerModules.aether ];
-							users = {
-								"igov" = lib.createRecursiveModuleWithExtraArgs ./igov packages;
-							};
-						};
-					}
-				]; 
-			};
-		};
+		nixosConfigurations = import ./configuration.nix { inherit hostname inputs pkgs specialArgs; };
 	};
 }

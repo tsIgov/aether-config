@@ -2,14 +2,13 @@
   "nodes": {
     "aether": {
       "inputs": {
-        "hyprland": "hyprland",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1735438906,
-        "narHash": "sha256-RjgtMQnfv5EFiMIMqSublDUDzh/WkbY1eDIquTBC22Q=",
+        "lastModified": 1735615790,
+        "narHash": "sha256-UTbqUqkj6IAuCwU7juhzT+6IQFj/V7JQ0iB1IqCWHYc=",
         "path": "/home/igov/repositories/tsIgov/aether-desktop-environment",
         "type": "path"
       },
@@ -51,22 +50,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "hyprland": {
-      "locked": {
-        "lastModified": 1734119587,
-        "narHash": "sha256-AKU6qqskl0yf2+JdRdD0cfxX4b9x3KKV5RqA6wijmPM=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "3566ab7246670a43abd2ffa913cc62dad9cdf7d5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
         "type": "github"
       }
     },

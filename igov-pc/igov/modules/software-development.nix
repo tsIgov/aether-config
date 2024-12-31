@@ -19,8 +19,8 @@ in
     home.packages = with software-development-pkgs; [
       dotnetCorePackages.sdk_8_0
       (vscode.override { commandLineArgs = "--password-store=\"gnome-libsecret\""; })
-      git-crypt
       age
+      git-agecrypt
     ];
 
   };
